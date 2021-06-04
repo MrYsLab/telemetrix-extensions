@@ -6,7 +6,7 @@ with open('README.md') as f:
     long_description = f.read()
 
 setup(
-    name='telemetrix',
+    name='telemetrix-extensions',
     packages=['telemetrix_pca9685', ],
     install_requires=['telemetrix', 'telemetrix-aio', 'telemetrix-rpi-pico',
                       'tmx-pico-aio'],
