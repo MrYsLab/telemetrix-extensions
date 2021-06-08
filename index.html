@@ -1,0 +1,388 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.6">
+    
+    
+      
+        <title>I2C Extensions For Telemetrix</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.875de78c.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#an-important-implementation-note" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="I2C Extensions For Telemetrix" class="md-header__button md-logo" aria-label="I2C Extensions For Telemetrix" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            I2C Extensions For Telemetrix
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              A Quick Introduction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="I2C Extensions For Telemetrix" class="md-nav__button md-logo" aria-label="I2C Extensions For Telemetrix" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    I2C Extensions For Telemetrix
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          A Quick Introduction
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        A Quick Introduction
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#an-important-implementation-note" class="md-nav__link">
+    An Important Implementation Note
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#an-important-implementation-note" class="md-nav__link">
+    An Important Implementation Note
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>A Quick Introduction</h1>
+                
+                <div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.5em"><i>Telemetrix I2C Extensions</i></div>
+<p><br>
+Telemetrix was designed from the beginning to allow users to extend its hardware support.
+An extension example is provided in the <a href="https://mryslab.
+github.io/telemetrix/dht/">User's Guide.</a></p>
+<p>Typically, when adding an extension, one makes modifications to both the client and 
+server 
+sides of Telemetrix.</p>
+<p>The exception to this rule is for adding support for i2c devices.</p>
+<p>The i2c standard describes a serial protocol for writing to and reading from an i2c 
+device. This communication protocol is independent of the functionality that the 
+device provides. For example, an i2c device that controls a set of servo motors is 
+very different from an i2c device that reports accelerometer data. Even devices with very 
+similar functionality often do not share anything in common other than the 
+communication protocol.</p>
+<p>For Telemetrix, each server implements the i2c protocol tailored for the 
+MCU it supports, resident in the server.</p>
+<p>As a result, all the control and monitoring code for i2c devices resides within 
+the client.  Through the Telemetrix API, the client 
+instructs the server to perform an i2c read or write, with no further
+modifications to the server required.</p>
+<p>There are two ways to support i2c in Telemetrix. The first is to incorporate the i2c 
+control code directly within your application. For simple i2c devices, this is perfectly 
+adequate, and in fact, the
+<a href="https://github.com/MrYsLab/telemetrix/blob/master/examples/i2c_adxl345_accelerometer.py">ADXL-345</a>
+example demonstrates this.  </p>
+<p>A separate library control class would be a better choice for more complex devices, 
+allowing for reuse and application design simplification.
+Because Telemetrix uses a consistent API across all client versions, 
+a single i2c device interface class can support all Telemetrix clients. 
+The only distinction is whether the class needs to support asyncio or non-asyncio Telemetrix clients.</p>
+<p>For example, to support the PCA9685 Servo Driver device, there are two interface classes.
+The first, 
+<a href="https://github.com/MrYsLab/telemetrix-extensions/blob/master/telemetrix_pca9685/telemetrix_pca9685.py">telemetrix_pca9685.py</a>,
+supports non-asyncio applications, and the second, 
+<a href="https://github.com/MrYsLab/telemetrix-extensions/blob/master/telemetrix_pca9685/telemetrix_pca9685_aio.py">telemetrix_pca9685_aio.py,</a>
+supports asyncio applications.</p>
+<p><a href="https://github.com/MrYsLab/telemetrix-extensions/tree/master/examples/pca9685">Examples</a>
+are available to demonstrate the use of both of these classes. </p>
+<p>The examples support Arduino, ESP-8266, and the Raspberry Pico MCU devices.</p>
+<h2 id="an-important-implementation-note">An Important Implementation Note</h2>
+<p>Programming the PCA9685, in some cases, requires performing an i2c read of one of the 
+device's 
+registers 
+and then applying 
+the result of that read to a write operation to set a register value. 
+Telemetrix uses callbacks to receive the results of  i2c reads. Therefore, internally, 
+callback functions 
+are provided within the library to receive the read results and use the results to 
+complete the operation.</p>
+<p>Let's look at the <em>sleep</em> method in telemetrix_pca9685.py.
+The request for the data is in the code below:</p>
+<pre><code class="language-python">    def sleep(self):
+        &quot;&quot;&quot;
+        Puts board into sleep mode.
+        First performs a read, and then processes return
+        in _i2c_read_complete_sleep.
+        &quot;&quot;&quot;
+        self.board.i2c_read(self.i2c_address,
+                            pca9685_constants.PCA9685_MODE1, 1,
+                            self._i2c_read_complete_sleep)
+        time.sleep(.5)
+</code></pre>
+<p>Notice that a callback method,  _i2c_read_complete_sleep, is specified. 
+The value of the MODE1 register is required to place the device into sleep mode.</p>
+<p>With the MODE1 value in hand, the callback method then places the device into a sleep mode.</p>
+<pre><code class="language-python">
+        def _i2c_read_complete_sleep(self, data):
+        &quot;&quot;&quot;
+        Finish processing sleep command
+
+        :param data: data from i2c device
+        &quot;&quot;&quot;
+        # data is [i2c_read_report, port, number of bytes read, i2c address,
+        #           device_register, data value, time_stamp]
+        awake = data[5]
+        # set sleep-bit high
+        sleep_value = awake | pca9685_constants.MODE1_SLEEP
+
+        self.board.i2c_write(self.i2c_address, [pca9685_constants.PCA9685_MODE1,
+                                                sleep_value])
+        time.sleep(.005)  # wait until cycle ends for sleep to be active
+</code></pre>
+<p><br></p>
+<p>Copyright (C) 2021 Alan Yorinks. All Rights Reserved.</p>
+<p><strong>Last updated 8 June 2021 </strong></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.34eae1b6.min.js"></script>
+      
+    
+  </body>
+</html>
