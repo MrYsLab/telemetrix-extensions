@@ -11,7 +11,7 @@ setup(
     install_requires=['telemetrix', 'telemetrix-aio', 'telemetrix-rpi-pico',
                       'tmx-pico-aio'],
 
-    version='0.1',
+    version='1.0',
     description="i2c Extensions For Telemetrix Clients",
     long_description=long_description,
     long_description_content_type='text/markdown',

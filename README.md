@@ -4,6 +4,21 @@ This repository contains i2c extension libraries for the
 [Telemetrix](https://mryslab.github.io/telemetrix/)
 project.
 
+To install using pypi, make sure that you have pip installed on your computer and for 
+Linux and Mac type:
+
+```python
+sudo pip3 install telemetrix-extensions
+```
+
+For Windows type:
+
+```python
+pip install telemetrix-extensions
+```
+
+You can read about i2c support [here.](https://mryslab.github.io/telemetrix-extensions/)
+
 Each library consists of two classes, one to handle non-asyncio applications and the 
 other to support asyncio applications.
 
