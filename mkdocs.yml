@@ -1,0 +1,7 @@
+site_name: I2C Extensions For Telemetrix
+nav:
+    - A Quick Introduction : index.md
+
+
+theme:
+  name: 'material'
